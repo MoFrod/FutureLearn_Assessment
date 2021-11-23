@@ -3,7 +3,7 @@ load.project("FutureLearn_Assessment")
 
 #Create a bar plot for the gender of students who have completed the course
 gender_counts <- table(course_completed$gender)
-barplot(gender_countgender_counts)
+barplot(gender_counts)
 
 #Create a bar plot for the gender without unknown of students who have completed the course
 barplot(gender_counts[1:4])
@@ -20,7 +20,7 @@ addmargins(gender_counts)
 round(100*prop.table(gender_counts), digits = 2)
 addmargins(incomplete_gender_counts)
 round(100*prop.table(incomplete_gender_counts), digits = 2)
-gender <- cbind(gender_counts, incomplete_gender_counts)
+gender <- rbind(gender_counts, incomplete_gender_counts)
 addmargins(gender)
 round(100*prop.table(gender), digits = 2)
 barplot(round(100*prop.table(gender_counts), digits = 2), round(100*prop.table(incomplete_gender_counts), digits = 2))

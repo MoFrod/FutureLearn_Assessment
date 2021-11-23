@@ -1,5 +1,10 @@
-# Import enrolments data for cyber security course
+library("ProjectTemplate")
+load.project("FutureLearn_Assessment")
+library(dplyr)
+library(tidyr)
 library(readr)
+
+# Import enrolments data for cyber security course
 cyber_security_1_enrolments <- read_csv("data/cyber-security-1_enrolments.csv")
 cyber_security_2_enrolments <- read_csv("data/cyber-security-2_enrolments.csv")
 cyber_security_3_enrolments <- read_csv("data/cyber-security-3_enrolments.csv")
