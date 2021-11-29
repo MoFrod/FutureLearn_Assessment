@@ -1,9 +1,9 @@
 # Find the student IDs of columns which include "declared" in the name.
 # These are the columns we would like to count TRUEs for.
-ids_of_declared_cols <- grep("declared", names(FL_data1))
+ids_of_declared_cols <- grep("declared", names(FL1))
 
 # Create a new column called "count" containing the value (count of columns) where this is true.
-true_counts <- FL_data1 %>% 
+true_counts <- FL1 %>% 
   mutate(num_true = rowSums(.[ids_of_declared_cols] != FALSE)) %>% # Count up how many of the columns have a value != FALSE
   print(ids_of_declared_cols, num_true, completed, n = 20, width = Inf) # View the selected columns (from line 3) and also the count, to confirm we have the intended result.
 
@@ -14,21 +14,27 @@ true_counts %>%
   print(ids_of_declared_cols, true_counts, n = 15, width = Inf) %>%
   ggplot(aes(x = num_true, y = n, fill = completed)) + geom_bar(stat="identity")
 
-# Calculate percentage of students who completed or did not complete the course and declared demographic data (number of columns filled by student)
-completed_no_dd <- ((100*(1626/37296)) # Completed, no demographic data provided
-incomplete_no_dd <- (100*(31467/37296)) # Incomplete, no demographic data provided
-completed_1_dd <- (100*(0/37296)) # Completed, 1 demographic data provided
-incomplete_1_dd <- (100*(14/37296)) # Incomplete, 1 demographic data provided
-completed_2_dd <- (100*(4/37296)) # Completed, 2 demographic data provided
-incomplete_2_dd <- (100*(15/37296)) # Incomplete, 2 demographic data provided
-completed_3_dd <- (100*(9/37296)) # Completed, 3 demographic data provided
-incomplete_3_dd <- (100*(31/37296)) # Incomplete, 3 demographic data provided
-completed_4_dd <- (100*(7/37296)) # Completed, 4 demographic data provided
-incomplete_4_dd <- (100*(79/37296)) # Incomplete, 4 demographic data provided
-completed_5_dd <- (100*(134/37296)) # Completed, 5 demographic data provided
-incomplete_5_dd <- (100*(858/37296)) # Incomplete, 5 demographic data provided
-completed_6_dd <- (100*(372/37296)) # Completed, 6 demographic data provided
-incomplete_6_dd <- (100*(2676/37296)) # Incomplete, 6 demographic data provided
+# 
+arch_counts <- joint_full %>%
+  mutate(num_true = rowSums(.[ids_of_declared_cols] != FALSE)) %>%
+  print(ids_of_declared_cols, num_true, completed, n = 20, width = Inf)
+
+#
+arch_counts %>%
+  group_by(archetype, completed) %>%
+  filter(!is.na(archetype)) %>%
+  count() %>%
+  print(ids_of_declared_cols, arch_counts, n = 20, width = Inf) %>%
+  ggplot(aes(x = completed, y = n, fill = archetype)) + geom_bar(stat="identity")
+
+#
+arch_counts %>%
+group_by(archetype, completed, num_true) %>% #swap archetype for type of data you're looking for.
+  filter(!is.na(archetype)) %>%
+  count() %>%
+  filter(!(num_true == 0)) %>%
+  print(ids_of_declared_cols, arch_counts, n = 65, width = Inf) %>%
+  ggplot(aes(x = num_true, y = n, fill = archetype)) + geom_bar(stat="identity")
 
 #Create a bar plot for the gender of students who have completed the course
 gender_counts <- table(course_completed$gender)
