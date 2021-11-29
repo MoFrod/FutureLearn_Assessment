@@ -21,10 +21,11 @@ full_archetypes <- rbind(cyber.security.1_archetype.survey.responses, cyber.secu
 # More info on joins: https://dplyr.tidyverse.org/reference/mutate-joins.html 
 joint_full <- left_join(FL1, full_archetypes, by = "learner_id", archetype)
 
-
+# Create data set of students, demographic data and archetypes for further investigation
+FL2 <- as_tibble(joint_full) #Create tibble
   
 #Filter students who have completed the course
-course_completed <- filter(cyber_security_full_enrolments, !is.na(cyber_security_full_enrolments$fully_participated_at))
+course_completed <- filter(full_enrolments, !is.na(full_enrolments$fully_participated_at))
 
 #Filter students who have not completed the course
-course_incomplete <- filter(cyber_security_full_enrolments, is.na(cyber_security_full_enrolments$fully_participated_at))
+course_incomplete <- filter(full_enrolments, is.na(full_enrolments$fully_participated_at))

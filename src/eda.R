@@ -1,4 +1,4 @@
-# Find the student IDs of columns which include "declared" in the name.
+# Find the learner IDs of columns which include "declared" in the name.
 # These are the columns we would like to count TRUEs for.
 ids_of_declared_cols <- grep("declared", names(FL1))
 
@@ -7,33 +7,67 @@ true_counts <- FL1 %>%
   mutate(num_true = rowSums(.[ids_of_declared_cols] != FALSE)) %>% # Count up how many of the columns have a value != FALSE
   print(ids_of_declared_cols, num_true, completed, n = 20, width = Inf) # View the selected columns (from line 3) and also the count, to confirm we have the intended result.
 
-# Quick plot of number of completes and non-completes based on the number of demographic columns filled in by the student.
-true_counts %>% 
+# Count the number of demographic columns filled in by the learner who completed and did not complete the course.
+learner_counts <- true_counts %>% 
   group_by(num_true, completed) %>% 
-  count() %>% 
-  print(ids_of_declared_cols, true_counts, n = 15, width = Inf) %>%
+  count()
+
+# Display a tibble of learners who have completed or not completed the course, counting number of demographic columns filled in by the learner. 
+learner_counts %>%
+  print(ids_of_declared_cols, true_counts, n = 15, width = Inf)
+
+# Calculate success rate for course
+complete_count <- (1626+4+9+7+134+372+2)
+Success_rate <- (100*(as.numeric(complete_count))/37296) %>% 
+  round(., digits = 2)
+
+# Calculate rate learners who do not complete the course
+incomplete_count <- (31467+14+15+31+79+858+2676+2)
+incomplete_rate <- (100*(as.numeric(incomplete_count))/37296) %>%
+  round(., digits = 2)
+
+# Calculate success rate for course of learners who provided demographic data
+d_count <- (14+15+4+31+9+79+7+858+134+2676+272)
+d_complete_count <- (4+9+7+134+372)
+d_success_rate <- (100*(as.numeric(d_complete_count))/(as.numeric(d_count))) %>%
+  round(., digits = 2)
+
+# Calculate success rate for course of learners who did not provide demographic data
+no_d_count <- (31467+1626+4+4)
+no_d_complete_count <- (1626+2)
+no_d_success_rate <- (100*(as.numeric(no_d_complete_count))/(as.numeric(no_d_count))) %>%
+  round(., digits = 2)
+
+# Quick plot of number of completes and non-completes based on the number of demographic columns filled in by the learner.
+learner_counts %>%
   ggplot(aes(x = num_true, y = n, fill = completed)) + geom_bar(stat="identity")
 
-# 
-arch_counts <- joint_full %>%
+# Count the number of demographic columns filled in by the learners of different archetypes.
+arch_true_counts <- FL2 %>%
   mutate(num_true = rowSums(.[ids_of_declared_cols] != FALSE)) %>%
   print(ids_of_declared_cols, num_true, completed, n = 20, width = Inf)
 
-#
-arch_counts %>%
+# Count the number of learners who completed or did not complete the course by archetype.
+arch_counts <- arch_true_counts %>%
   group_by(archetype, completed) %>%
   filter(!is.na(archetype)) %>%
-  count() %>%
-  print(ids_of_declared_cols, arch_counts, n = 20, width = Inf) %>%
+  count()
+
+# Display a tibble of number of learners who have completed or did not complete the course by archetype.
+arch_counts %>%
+  print(ids_of_declared_cols, arch_counts, n = 20, width = Inf)
+
+# Quick plot of number of students who completed or did not complete the course by archetype.
+arch_counts %>%
   ggplot(aes(x = completed, y = n, fill = archetype)) + geom_bar(stat="identity")
 
-#
-arch_counts %>%
+# Quick plot of learner archetypes by number of demographic columns declared. 
+arch_true_counts %>%
 group_by(archetype, completed, num_true) %>% #swap archetype for type of data you're looking for.
   filter(!is.na(archetype)) %>%
   count() %>%
   filter(!(num_true == 0)) %>%
-  print(ids_of_declared_cols, arch_counts, n = 65, width = Inf) %>%
+  print(ids_of_declared_cols, arch_true_counts, n = 65, width = Inf) %>%
   ggplot(aes(x = num_true, y = n, fill = archetype)) + geom_bar(stat="identity")
 
 #Create a bar plot for the gender of students who have completed the course
