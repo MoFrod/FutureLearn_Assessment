@@ -14,6 +14,11 @@ knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_knit$set(root.dir= normalizePath('..'))
 ```
 
+```{R, echo = FALSE}
+library(knitr)
+opts_chunk$set(tidy.opts=list(width.cutoff=80), tidy=TRUE)
+```
+
 ```{r ProjectTemplate, include = FALSE}
 library(ProjectTemplate)
 load.project()
@@ -90,16 +95,26 @@ It is unclear whether there have been any problems in data acquisition or extrac
 ### Data description
 
 The first run of Newcastle University's FutureLearn cyber security course provides the following databases:
+
 - archetype survey responses (id, learner_id, responded_at, archetype); 
+
 - enrolments (learner_id, enrolled_at,	unenrolled_at	role,	fully_participated_at,	purchased_statement_at	gender,	country	age_range,	highest_education_level,	employment_status,	employment_area	detected_country); 
+
 - leaving survey responses (id, learner_id,	left_at	leaving_reason, last_completed_step_at,	last_completed_step,	last_completed_week_number,	last_completed_step_number); 
+
 - question responses (learner_id, quiz_question,	question_type,	week_number,	step_number,	question_number,	response,	cloze_response,	submitted_at,	correct); 
+
 - step activity (learner_id	step,	week_number	step_number,	first_visited_at, last_completed_at); and
+
 - weekly sentiment survey (id	responded_at,	week_number,	experience_rating,	reason).
 
-The second run provides the same databases as well as a databases specifying the course team members (id,	first_name,	last_name,	team_role,	user_role). 
+The second run provides the same databases as well as a databases specifying:
 
-The other five runs provide the same databases as the second run as well as a database on the course's video stats (step_position,	title	video_duration,	total_views,	total_downloads,	total_caption_views,	total_transcript_views,	viewed_hd,	viewed_five_percent,	viewed_ten_percent,	viewed_twentyfive_percent,	viewed_fifty_percent,	viewed_seventyfive_percent,	viewed_ninetyfive_percent,	viewed_onehundred_percent,	console_device_percentage,	desktop_device_percentage,	mobile_device_percentage,	tv_device_percentage,	tablet_device_percentage,	unknown_device_percentage,	europe_views_percentage,	oceania_views_percentage,	asia_views_percentage,	north_america_views_percentage,	south_america_views_percentage,	africa_views_percentage,	antarctica_views_percentage).
+- team members (id,	first_name,	last_name,	team_role,	user_role). 
+
+The other five runs provide the same databases as the second run as well as a database on:
+
+- video stats (step_position,	title	video_duration,	total_views,	total_downloads,	total_caption_views,	total_transcript_views,	viewed_hd,	viewed_five_percent,	viewed_ten_percent,	viewed_twentyfive_percent,	viewed_fifty_percent,	viewed_seventyfive_percent,	viewed_ninetyfive_percent,	viewed_onehundred_percent,	console_device_percentage,	desktop_device_percentage,	mobile_device_percentage,	tv_device_percentage,	tablet_device_percentage,	unknown_device_percentage,	europe_views_percentage,	oceania_views_percentage,	asia_views_percentage,	north_america_views_percentage,	south_america_views_percentage,	africa_views_percentage,	antarctica_views_percentage).
 
 ### Data quality 
 
@@ -129,26 +144,36 @@ This means that there are 37,296 learners who have enrolled in Newcastle Univers
 **Goal 2 (Demographic Data)**
 
 Demographic data refers to the following fields that learners could provide:
+
 - gender, 
+
 - country, 
+
 - age_range, 
+
 - highest_education_level,
+
 - employment_status, and
+
 - employment_area.
 
 To investigate whether learners had provided any of this demographic data, a new data set called 'FL1' was created with new columns (that corresponded to the aforementioned demographic data) showing TRUE or FALSE for whether the learner had shared something.
 
 ```{R learner_counts}
-# Create a new column called "count" in FL1 containing the value (count of columns) where there is a a vale != FALSE.
+# Create a new column called "count" in FL1 containing the value (count of 
+# columns) where there is a a vale != FALSE.
 true_counts <- FL1 %>% 
-  mutate(num_true = rowSums(.[ids_of_declared_cols] != FALSE)) # Count up how many of the columns have a value != FALSE.
+  mutate(num_true = rowSums(.[ids_of_declared_cols] != FALSE)) # Count up how 
+# many of the columns have a value != FALSE.
 
-# Count the number of demographic columns filled in by the learner who completed and did not complete the course.
+# Count the number of demographic columns filled in by the learner who completed
+# and did not complete the course.
 learner_counts <- true_counts %>% 
   group_by(num_true, completed) %>% 
   count()
 
-# Display a tibble of learners who have completed or not completed the course, counting number of demographic columns filled in by the learner. 
+# Display a tibble of learners who have completed or not completed the course, 
+# counting number of demographic columns filled in by the learner. 
 learner_counts %>%
   print(ids_of_declared_cols, true_counts, n = 15, width = Inf)
 ```
@@ -200,8 +225,11 @@ This means that of the 33,097 learners who did not provide demographic data, 1,6
 **Goal 5 (Potential Correlation)**
 
 We have identified three different success rates for learners:
+
 - 5.87% Gross Success Rate
+
 - 12.53% Demographic Data Success Rate
+
 - 4.92% No Demographic Data Success Rate
 
 It appears there may be a correlation between learners' success rate and their provision of demographic data (as a proxy for learner engagement); learners who provide demographic data are over twice as likely (2.54x) to complete the course than learners who do not provide demographic data.
@@ -214,16 +242,23 @@ For this analysis, the objective is to determine whether learners have a higher 
 
 ### Data mining goals and success criteria
 
-To better understand the aformentioned correlation, 
+To better understand the aformentioned correlation, (dive into demographics)
+
+## Business understanding (Third Iteration)
+
+### Business objectives and success criteria
+
+Archetypes! 
+
+### Data mining goals and success criteria
+
+Archetypes!
 
 ## Data preparation 
 
 (a description of the dataset after pre-processing and the process it was produced - basically why and how of munge stuff)
 
-```{r cars}
-summary(cars)
-```
-
+## Outputs 
 
 
 ```{r pressure, echo=FALSE}
