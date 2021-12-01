@@ -1,36 +1,16 @@
-# Find the learner IDs of columns which include "declared" in the name.
-# These are the columns we would like to count TRUEs for.
-ids_of_declared_cols <- grep("declared", names(FL1))
-
-# Create a new column called "count" containing the value (count of columns) where this is true.
+# Create a new column called "count" in FL1 containing the value (count of columns) where there is a a vale != FALSE.
 true_counts <- FL1 %>% 
-  mutate(num_true = rowSums(.[ids_of_declared_cols] != FALSE)) %>% # Count up how many of the columns have a value != FALSE
+  mutate(num_true = rowSums(.[ids_of_declared_cols] != FALSE)) %>% # Count up how many of the columns have a value != FALSE.
   print(ids_of_declared_cols, num_true, completed, n = 20, width = Inf) # View the selected columns (from line 3) and also the count, to confirm we have the intended result.
 
-# Count the number of demographic columns filled in by the learner who completed and did not complete the course.
-learner_counts <- true_counts %>% 
-  group_by(num_true, completed) %>% 
-  count()
-
-# Display a tibble of learners who have completed or not completed the course, counting number of demographic columns filled in by the learner. 
-learner_counts %>%
-  print(ids_of_declared_cols, true_counts, n = 15, width = Inf)
-
-# Calculate success rate for course
-complete_count <- (1626+4+9+7+134+372+2)
-Success_rate <- (100*(as.numeric(complete_count))/37296) %>% 
-  round(., digits = 2)
-
-# Calculate rate learners who do not complete the course
-incomplete_count <- (31467+14+15+31+79+858+2676+2)
-incomplete_rate <- (100*(as.numeric(incomplete_count))/37296) %>%
-  round(., digits = 2)
-
 # Calculate success rate for course of learners who provided demographic data
-d_count <- (14+15+4+31+9+79+7+858+134+2676+272)
-d_complete_count <- (4+9+7+134+372)
+d_count <- (14+15+4+31+9+79+7+858+134+2676+272) %>%
+  print()
+d_complete_count <- (4+9+7+134+372) %>%
+  print ()
 d_success_rate <- (100*(as.numeric(d_complete_count))/(as.numeric(d_count))) %>%
-  round(., digits = 2)
+  round(., digits = 2) %>%
+  print()
 
 # Calculate success rate for course of learners who did not provide demographic data
 no_d_count <- (31467+1626+4+4)

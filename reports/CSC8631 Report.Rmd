@@ -29,45 +29,11 @@ This report details the process and findings of exploratory data analysis for Ne
 
 ### Business objectives and success criteria
 
-FutureLearn is a massive open online course (MOOC) provider. It promotes itself as *"a powerful new way to learn online"* @FurtureLearn, designed with the principles of effective learning. Learning effectiveness can be indicated by student engagement, their success rate, and completion time @E-learning. A core objective of FutureLearn is to improve learning effectiveness.
+FutureLearn is a massive open online course (MOOC) provider. It promotes itself as *"a powerful new way to learn online"* @FutureLearn, designed with the principles of effective learning. Learning effectiveness can be indicated by student engagement, their success rate, and completion time @E-learning. A core objective of FutureLearn is to improve learning effectiveness.
 
 The objective of this data analysis is to better understand the learning effectiveness of Newcastle University's Future Learn Cyber Security course. The process and findings outlined by this report explore the question: "Do learners have a higher chance of success the more data they share with FutureLearn?" Here, "a higher chance of success" means that learners are more likely to complete the course. The data shared by learners refers to the optional data requested by FutureLearn; specifically, the provision of personal identifiers like demographic information. The provision of this data is taken to be an indicator of student engagement with the course. For this analysis the business success criteria is to give useful insights into the relationship between learner engagement and learner success rate.
 
 (objectives that were considered and rejected, and rational for why?)
-
-### Inventory of resources
-
-Newcastle University has provided x number of data sets for exploration.
-
-Tidyverse for R is the library used for the analysis, ggplot2 for R is the library used for visualisations, ProjectTemplate for R is used to improve the reproducibility of this analysis, Git is used for version control, and all written documentation is created through RMarkdown for R.
-
-### Requirements, assumptions and constraints
-
-This project, as well as the process and findings outlined in this report, is limited to the data analysis pipeline. (assumptions made about the nature of the problem, constraints imposed on the project (technical suite)?) corellation, confounding variables
-
-### Risks and contingencies
-
-Risk re un-reproducibility, version control, etc. - check data flow lecture) The technical suite used aims to apply good programming practice, and reduce common risks that might delay the project or cause it to fail.
-
-### Terminology
-
-### Costs and benefits
-
-This section describes the costs of the project and predicted business benefits if the project is successful (e.g., return on investment). Other less tangible benefits (e.g., customer satisfaction) should also be highlighted.
-
-### Data mining goals and success criteria
-
-The initial investigation outlined by this report explores the question: "Do learners have a higher chance of success the more data they share with FutureLearn?" To understand this, the data mining aims to determine:
-
-1.  What is the success rate of learners? The data mining success criteria is the percentage of all learners who complete the course.
-
-2.  How many learners provide any demographic data? The data mining success criteria is the percentage of all learners who provide optional demographic data such as gender, age range or employment status.
-
-3.  What is the success rate of learners who provide demographic data? The data mining success criteria is the percentage of learners who complete the course and provide demographic data.
-
-4.  What is the success rate of learners who do not provide demographic data? The data mining success criteria is the percentage of learners who complete the course and do not provide any demographic data.
-
-5.  Is there any correlation between success and the provision of demographic data? The data mining success criteria is the difference between (and standard deviation of?) each of the aforementioned learner success rates.
 
 ### Project plan
 
@@ -77,13 +43,49 @@ The deadline for this project is 16:30, 3 December 2021. (This section lists the
 
 (methodology, This section gives an initial view of what tools and techniques are likely to be used and how. It describes the requirements for tools and techniques, lists available tools and techniques, and matches them to requirements.)
 
+### Inventory of resources
+
+Newcastle University has provided x number of data sets for exploration.
+
+Tidyverse for R is the library used for the analysis, ggplot2 for R is the library used for visualisations, ProjectTemplate for R is used to improve the reproducibility of this analysis, Git is used for version control, and all written documentation is created through RMarkdown for R.
+
+### Requirements, assumptions and constraints
+
+This project, as well as the process and findings outlined in this report, is limited to the data analysis pipeline. (assumptions made about the nature of the problem, constraints imposed on the project (technical suite)?) correlation, confounding variables
+
+### Risks and contingencies
+
+Risk re un-reproducibility, version control, etc. - check data flow lecture) The technical suite used aims to apply good programming practice, and reduce common risks that might delay the project or cause it to fail.
+
+### Costs and benefits
+
+This section describes the costs of the project and predicted business benefits if the project is successful (e.g., return on investment). Other less tangible benefits (e.g., customer satisfaction) should also be highlighted.
+
+### Terminology
+
+tibble = table
+
+### Data mining goals and success criteria
+
+The exploratory data analysis outlined by this report explores the question: "Do learners have a higher chance of success the more data they share with FutureLearn?" To understand this, the data mining aims to determine:
+
+1.  What is the gross success rate of learners? The data mining success criteria is the percentage of all learners who complete the course.
+
+2.  How many learners provide any demographic data? The data mining success criteria is the percentage of all learners who provide optional demographic data such as gender, age range or employment status.
+
+3.  What is the success rate of learners who provide demographic data? The data mining success criteria is the percentage of learners who complete the course and provide demographic data.
+
+4.  What is the success rate of learners who do not provide demographic data? The data mining success criteria is the percentage of learners who complete the course and do not provide any demographic data.
+
+5.  Is there any correlation between success and the provision of demographic data? The data mining success criteria is the difference between (and standard deviation of?) each of the aforementioned learner success rates.
+
 ## Data understanding
 
 ### Initial data collection
 
 Newcastle University's FutureLearn cyber security course has run seven times. The first run provided six different databases, the second run provided seven, and the others provided eight. There are 53 different databases for potential exploration.
 
-There have been no problems in data acquisition or extraction.
+It is unclear whether there have been any problems in data acquisition or extraction as Newcastle University has provided the data.
 
 ### Data description
 
@@ -99,25 +101,120 @@ The second run provides the same databases as well as a databases specifying the
 
 The other five runs provide the same databases as the second run as well as a database on the course's video stats (step_position,	title	video_duration,	total_views,	total_downloads,	total_caption_views,	total_transcript_views,	viewed_hd,	viewed_five_percent,	viewed_ten_percent,	viewed_twentyfive_percent,	viewed_fifty_percent,	viewed_seventyfive_percent,	viewed_ninetyfive_percent,	viewed_onehundred_percent,	console_device_percentage,	desktop_device_percentage,	mobile_device_percentage,	tv_device_percentage,	tablet_device_percentage,	unknown_device_percentage,	europe_views_percentage,	oceania_views_percentage,	asia_views_percentage,	north_america_views_percentage,	south_america_views_percentage,	africa_views_percentage,	antarctica_views_percentage).
 
-### Data exploration
-
-
-
-The exploratory analysis outlined by this report is conducted on the enrolments and archetypes data sets for all seven runs. The data sets for all seven runs have been provided by Newcastle University for the analysis in this report.
-
-There are 37296 learners in the seven runs of Newcastle University's FutureLearn Cyber Security course, and each learner has a unique learner_id. In the enrolments and archetypes data sets there are 13 and four columns of data, respectively. There are some missing values in the enrolments data set (what about archetypes?), but otherwise the data quality is good.
-
-
-To understand the FutureLearn students' success rate (course completion) for Newcastle University's Cyber Security course, a variable was created from filtering the students by those who had data under fully_participated_at.
-
-(The success criteria of this project will include course completion as success rate, provision of personal identifiers such as demographic information as student engagement, and completion time?. Data analysis will be focused on the enrollments data, and use CRISP-DM as the methodology.) To become familiar with the data, the enrollments data sets for all 7 runs were combined into one full dataset.
-
-
 ### Data quality 
 
 (Completeness/accuracy - not completely complete)
 p
 The data collected by the first run of the course is relatively sparse compared to the seventh run of the course. In runs three and four more data is being collected; this could be because there are fewer optional sections (such as the archetype or leaving survey), but it is unknown why this change has occurred.
+
+### Data exploration
+
+To address the business objective and success criteria, the exploratory analysis outlined by this report begins with the enrolments database because it includes the field fully_participated_at, which is considered to mean course completion, as well as learners' demographic data. 
+
+**Goal 1 (Gross Success Rate)**
+
+To understand the success rate of all learners who undertake the course, the total number of learners who have undertaken the course across all seven runs needs to be determined. All seven runs were combined, two filters were created to show how many learners completed (complete) and did not complete the course (incomplete). 
+
+```{R gross_success_rate}
+# Calculate the success rate of all learners who enrolled in the course. 
+total_learners <- (2154 + 35142) %>% #How many total learners are there?
+  print()
+gross_success_rate <- (100*(2154/total_learners)) %>% #Success rate as a percentage
+  round(., digits = 2) %>% #Success rate rounded to two digits
+  print()
+```
+
+This means that there are 37,296 learners who have enrolled in Newcastle University's FutureLearn cyber security course, and 5.78% of them have completed it (the gross success rate). 
+
+**Goal 2 (Demographic Data)**
+
+Demographic data refers to the following fields that learners could provide:
+- gender, 
+- country, 
+- age_range, 
+- highest_education_level,
+- employment_status, and
+- employment_area.
+
+To investigate whether learners had provided any of this demographic data, a new data set called 'FL1' was created with new columns (that corresponded to the aforementioned demographic data) showing TRUE or FALSE for whether the learner had shared something.
+
+```{R learner_counts}
+# Create a new column called "count" in FL1 containing the value (count of columns) where there is a a vale != FALSE.
+true_counts <- FL1 %>% 
+  mutate(num_true = rowSums(.[ids_of_declared_cols] != FALSE)) # Count up how many of the columns have a value != FALSE.
+
+# Count the number of demographic columns filled in by the learner who completed and did not complete the course.
+learner_counts <- true_counts %>% 
+  group_by(num_true, completed) %>% 
+  count()
+
+# Display a tibble of learners who have completed or not completed the course, counting number of demographic columns filled in by the learner. 
+learner_counts %>%
+  print(ids_of_declared_cols, true_counts, n = 15, width = Inf)
+```
+This table shows us how many learners who have completed (TRUE) or not completed (FALSE) the course have provided demographic data and, if so, how many demographic data fields they have provided. 
+
+There are four instances of NA in the table that should be investigated further; for now, it is assumed that these learners did not provide demographic data. 
+
+Below shows that 4,199 learners provided demographic data.
+
+```{R d_count}
+# Calculate the number of learners who provided demographic data
+d_count <- (37296 - 31467 - 1626 - 4) %>%
+  print()
+```
+
+**Goal 3 (Demographic Data Success Rate)**
+
+The table above shows us how many learners provided demographic data and completed the course. This enables us to calculate the success rate of learners who have provided demographic data. 
+
+```{R d_success_rate}
+# Calculate how many learners provided demographic data.
+d_complete_count <- (4+9+7+134+372) %>%
+  print ()
+# Calculate the success rate of learners who provided demographic data.
+d_success_rate <- (100*(as.numeric(d_complete_count))/(as.numeric(d_count))) %>%
+  round(., digits = 2) %>%
+  print()
+```
+This means that of the 4,199 learners who provided demographic data, 526 completed the course. The success rate of learners who provide demographic data is 12.53%.
+
+**Goal 4 (No Demographic Data Success Rate)**
+
+The table created as part of Goal 2 shows how many learners did not complete the course and did not provide demographic data. 
+
+```{R no_d_success_rate}
+# Calculate how many learners did not provide demographic data.
+no_d_count <- (31467+1626+2+2) %>%
+  print()
+# Calculate how many of those learners completed the course.
+no_d_complete_count <- (1626+2) %>%
+  print()
+# Calculate success rate of learners who did not provide demographic data.
+no_d_success_rate <- (100*(as.numeric(no_d_complete_count))/(as.numeric(no_d_count))) %>%
+  round(., digits = 2) %>%
+  print()
+```
+This means that of the 33,097 learners who did not provide demographic data, 1,628 learners did not complete the course. The success rate of learners who do not provide demographic data is 4.92%.
+
+**Goal 5 (Potential Correlation)**
+
+We have identified three different success rates for learners:
+- 5.87% Gross Success Rate
+- 12.53% Demographic Data Success Rate
+- 4.92% No Demographic Data Success Rate
+
+It appears there may be a correlation between learners' success rate and their provision of demographic data (as a proxy for learner engagement); learners who provide demographic data are over twice as likely (2.54x) to complete the course than learners who do not provide demographic data.
+
+## Business Understanding (Second Iteration)
+
+### Business objectives and success criteria
+
+For this analysis, the objective is to determine whether learners have a higher chance of success the more data they share with FutureLearn. An initial investigation into the data provided by Newcastle University  suggests that learners do have a higher chance of success the more data they share with FutureLearn. However, the business success criteria is to give useful insights into the relationship between learner engagement and learner success rate. A better understanding of the correlation between learners' success rate and their provision of demographic data is therefore needed. 
+
+### Data mining goals and success criteria
+
+To better understand the aformentioned correlation, 
 
 ## Data preparation 
 
