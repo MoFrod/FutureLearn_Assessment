@@ -16,18 +16,6 @@ c_o <- (1) # Other who completed.
 SR_o <- (100*(c_o/o)) %>%
   round(., digits = 2) # Success rate of other.
 
-
-# Quick plot of gender counts by amount of demographic data declared.
-gender_counts %>%
-  ggplot(aes(x = num_true, y = n, fill = gender)) + geom_bar(stat="identity", position="dodge") + scale_fill_brewer(palette = "PuOr") + labs(title = "Number of Demographic Data Fields by Number of Learners of Each Gender ", x = "Number of Demographic Data Fields Provided by Learner", y = "Number of Learners", fill = "Gender")
- # Men are more likely to declare all 6 demographic data points than women. If non-binary/other is declared, almost all demographic fields are provided.
-
-# Group by age range
-age_counts <- true_counts %>%
-  group_by(num_true, age_range, completed) %>%
-  count() %>%
-  filter(!(age_range == "Unknown"))
-
 # Success rate of age.
 total_age <- sum(age_counts$n) # Total learners who declared age.
 c_total_age <- (2+74+63+1+2+9+16+1+2+3+71+1+1+1+5+60+7+78+26+84) # Completion of total learners.
@@ -61,38 +49,6 @@ total_o65 <- (4+246+211+74+63) # Total learners aged over 65.
 c_o65 <- (74+63) # Completion of over 65s.
 SR_o65 <- (100*(c_total_o65/total_o65)) %>%
   round(., digits = 2) # Success rate of over 65s.
-
-# Quick plot of age counts by course completion.
-age_counts %>%
-  mutate(age_range = factor(age_range, ordered=TRUE,
-                            levels = c("<18", "18-25", "26-35", "36-45", "46-55", "56-65", ">65"))) %>%
-  ggplot(aes(x = age_range, y = n, fill = completed)) + geom_bar(stat="identity", position="dodge") + scale_fill_brewer(palette = "Paired") + labs(title = "Course Completion by Learner Age Range", x = "Learner Age Range", y = "Number of Learners", fill = "Course Completed")
-
-#Quick plot of age counts by number of demographic fields provided.
-age_counts %>%
-  mutate(age_range = factor(age_range, ordered=TRUE,
-                            levels = c("<18", "18-25", "26-35", "36-45", "46-55", "56-65", ">65"))) %>%
-  ggplot(aes(x = num_true, y = n, fill = age_range)) + geom_bar(stat="identity", position="dodge") + scale_fill_brewer(palette = "PuOr") + labs(title = "Number of Demographic Data Fields by Number of Learners of Each Age Range", x = "Number of Demographic Data Fields Provided by Learner", y = "Number of Learners", fill = "Age")
-
-# Group by country.
-country_counts <- true_counts %>%
-  group_by(num_true, country, completed) %>%
-  count() %>%
-  filter(!(country == "Unknown")) 
-
-# Quick plot of country counts (this doesn't work - too many countries).
-country_counts %>%
-  ggplot(aes(x = country, y = n, fill = completed)) + geom_bar(stat="identity", position="dodge") + scale_fill_brewer(palette = "Paired")
-
-country_counts %>%
-  filter(num_true == 6) %>%
-  ggplot(aes(x = num_true, y = n, fill = country)) + geom_bar(stat="identity", position="dodge")
-
-# Group by highest level of education.
-education_counts <- true_counts %>%
-  group_by(num_true, highest_education_level, completed) %>%
-  count() %>%
-  filter(!(highest_education_level == "Unknown"))
 
 # Success rate by highest level of education.
 total_edu <- (sum(education_counts$n)) # Total number of learners who declared education.
@@ -132,20 +88,6 @@ c_udoc <- (5+17) # Completion of university doctorates.
 SR_udoc <- (100*(c_udoc/total_udoc)) %>%
   round(., digits = 2) # Success rate of university doctorates. 
 
-# Quick plot of highest level of education counts by course completion.
-education_counts %>%
-  ggplot(aes(x = highest_education_level, y = n, fill = completed)) + geom_bar(stat="identity", position="dodge") + scale_fill_brewer(palette = "Paired") + labs(title = "Course Completion by Learner Education Level", x = "Learner Education Level", y = "Number of Learners", fill = "Course Completed")
-
-#Quick plot of highest education counts by number of demographic fields.
-education_counts %>%
-  ggplot(aes(x = num_true, y = n, fill = highest_education_level)) + geom_bar(stat="identity", position="dodge") + scale_fill_brewer(palette = "PuOr") + labs(title = "Number of Demographic Data Fields by Number of Learners of Each Education Level", x = "Number of Demographic Data Fields Provided by Learner", y = "Number of Learners", fill = "Education Level")
-
-# Group by employment status.
-estatus_counts <- true_counts %>%
-  group_by(num_true, employment_status, completed) %>%
-  count() %>%
-  filter(!(employment_status == "Unknown"))
-
 # Success rate of employment status. 
 estatus_total <- (sum(estatus_counts$n)) # Total employment status.
 c_estatus <- (1+1+4+15+1+1+6+24+10+16+1+2+96+62+3+40+1+5+10+2+7+174+1+2+31) # Completion of total employment status.
@@ -184,24 +126,6 @@ c_ptworking <- (2+31) # Completion of part time.
 SR_ptworking <- (100*(c_ptworking/ptworking_total)) %>%
   round(., digits = 2) # Success rate of part time.
 
-# Quick plot of employment status counts by course completion.
-estatus_counts %>%
-  ggplot(aes(x = employment_status, y = n, fill = completed)) + geom_bar(stat="identity", position="dodge") + scale_fill_brewer(palette = "Paired") + labs(title = "Course Completion by Learner Employment Status", x = "Learner Employment Status", y = "Number of Learners", fill = "Course Completed")
 
-# Quick plot of employment status counts by number of demographic fields provided. 
-estatus_counts %>%
-  ggplot(aes(x = num_true, y = n, fill = employment_status)) + geom_bar(stat="identity", position="dodge") + scale_fill_brewer(palette = "PuOr") + labs(title = "Number of Demographic Data Fields by Number of Learners of Each Employment Status", x = "Number of Demographic Data Fields Provided by Learner", y = "Number of Learners", fill = "Employment Status")
-
-# Group by employment area.
-earea_counts <- true_counts %>%
-  group_by(num_true, employment_area, completed) %>%
-  count() %>%
-  filter(!(employment_area == "Unknown"))
-
-# Quick plot of employment area (this doesn't work well as there are too many).
-earea_counts %>%
-  ggplot(aes(x = employment_area, y = n, fill = completed)) + geom_bar(stat="identity", position="dodge") + scale_fill_brewer(palette = "Paired")
-earea_counts %>%
-  ggplot(aes(x = num_true, y = n, fill = employment_area)) + geom_bar(stat="identity", position="dodge")
 
 

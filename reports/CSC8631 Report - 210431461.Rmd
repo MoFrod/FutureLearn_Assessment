@@ -31,7 +31,7 @@ This report details the process and findings of exploratory data analysis for Ne
 
 FutureLearn is a massive open online course (MOOC) provider. It promotes itself as *"a powerful new way to learn online"* (@FutureLearn), designed with the principles of effective learning. Learning effectiveness can be indicated by learner engagement, their success rate, and completion time (@E-learning). A core objective of FutureLearn is to improve learning effectiveness.
 
-The objective of the exploratory data analysis outlined by this report is to better understand the learning effectiveness of Newcastle University's Future Learn Cyber Security course. The process and findings described by this report explore the question: "Do learners have a higher chance of success the more data they share with FutureLearn?" Here, "a higher chance of success" means that learners are more likely to complete the course. The data shared by learners refers to the optional data requested by FutureLearn; specifically, the provision of personal identifiers like demographic information. The provision of this data is taken to be an indicator of student engagement with the course. For this analysis the business success criteria is to give useful insights into the relationship between learner engagement and learner success rate.
+The objective of the exploratory data analysis outlined by this report is to better understand the learning effectiveness of Newcastle University's Future Learn Cyber Security course. The process and findings described by this report explore the question: "Do learners have a higher chance of success the more data they share with FutureLearn?" Here, "a higher chance of success" means that learners are more likely to complete the course. The data shared by learners refers to the optional data requested by FutureLearn; specifically, the provision of personal identifiers like demographic information. The provision of this data is taken to be an indicator of learner engagement with the course. For this analysis the business success criteria is to give useful insights into the relationship between learner engagement and learner success rate.
 
 Other objectives that were considered included:
 
@@ -45,7 +45,7 @@ These objectives have not been pursued by this project because they are concerne
 
 ### Costs and benefits
 
-This is a low cost project because it is not currently resource intensive (as outlined by the resource inventory below). If the analysis and findings outlined by this report hold true, there could be significant business benefits. For example, it could help Newcastle University and FutureLearn support students to succeed, increasing learner satisfaction and, if desired, could lead to increase of learners for both organisations.
+This is a low cost project because it is not currently resource intensive (as outlined by the resource inventory below). If the analysis and findings outlined by this report hold true, there could be significant business benefits. For example, it could help Newcastle University and FutureLearn support learners to succeed, increasing learner satisfaction and, if desired, could lead to increase of learners for both organisations.
 
 ### Project plan
 
@@ -55,14 +55,19 @@ The resources required for this project, as well as inputs (resources, tools and
 
 ### Terminology
 
-(build this up more)
-R
-RStudio
-R packages (mention the list in the next two sections)
-Git (include Git Hub and Git Bash)
-tibble = table
-success rate
+The terminology used throughout this report includes:
 
+- R, which is a programming language for statistical computing and graphics.
+
+- RStudio, which is an Interated Development Environment for R. 
+
+- R packages, which are extensions to the R statistcial programming language. R packages contain code, data, and documentation in a standardised collection format that can be installed by users of R. The R packages used by this report are listed in the section below. 
+
+- Git, which is software for tracking changes in any set of files, usually used for coordinating work among programmers collaboratively developing source code. GitHub is a provider of internet hosting for software development and version control using Git. Git Bash is an application for Microsoft Windows environments which provides an emulation layer for a Git command line experience.
+
+- Tibble, which is a data frame that stores data in R and appears as a table.
+
+- Success rate, which is the number of learners who have completed the course divided by the total number of learners as a percentage.
 
 ### Inventory of resources
 
@@ -82,7 +87,7 @@ This project utilises the following tools and techniques:
 
 - ProjectTemplate is the R package used to improve the reproducibility of this analysis;
 
-- Git is used for version control; 
+- Git (specifically GitHub and GitBash) is used for version control; 
 
 - all written documentation is created with the R package, RMarkdown; and
 
@@ -296,7 +301,7 @@ This second iteration of data exploration also uses the enrolments data set, wit
 
 **Goal 2.1 (Gender Success Rate)**
 
-Using true_counts from Goal 2 in the first iteration of data exploration we can determine that 4159 learners declared their gender. 
+Using true_counts from Goal 2 in the first iteration of data exploration we can determine that 4159 learners declared their gender to FutureLearn. 
 
 ```{R total_gender}
 # Identify which genders completed or did not complete the course.
@@ -317,68 +322,17 @@ SR_total_gender <- (100*(c_total_gender/total_gender)) %>%
   round(., digits = 2) %>%
   print()
 ```
-This allows us to determine that the success rate of learners who declare their gender is 12.26%. This process was then applied to each declared gender (code can be found in the file ```eda2.R``` located in the ```src``` folder) to create the table below.
+This allows us to determine that the success rate of learners who declare their gender is 12.26%. The graph below was created to understand whether the success rate varies for different genders declared by learners.
 
 ```{R gender_completion, echo = FALSE}
 # Quick plot of gender counts by completion of course.
 gender_counts %>%
   ggplot(aes(x = gender, y = n, fill = completed)) + geom_bar(stat="identity", position="dodge") + scale_fill_brewer(palette = "Paired") +labs(title = "Course Completion by Learner Gender", x = "Learner Gender", y = "Number of Learners", fill = "Course Completed")
 ```
+This graph indicates that those who identify as male may be more likely to complete the course. This is unclear, however, because there seems to be a proportionate number of learners who identify as male, but do not complete the course. 
 
+To better understand the results of this graph, the table below was created. The table was created through the same process used to create the gender success rate (as above) by applying it to each declared gender (the code can be found in the file ```eda2.R``` located in the ```src``` folder).
 
-**Goal 2.2 (Age Success Rate)**
-
-Applying the same analysis process as Goal 2.1, the success rate of each age range was calculated. Again, the code can be found in ```eda2.R```.
-
-```{R age_success_rate, echo = FALSE}
-# Success rate of age as a tibble
-age_success_rate <- tribble(~Success_Rate, ~Percentage, "Age", 12.59, "<18", 4.76, "18-25", 4.2, "26-35", 8.8, "36-45", 11.02, "46-55", 14.12, "56-65", 17.97, ">65", 22.91) %>%
-  print()
-```
-
-This table shows us that of 4028 learners who declared their age, 12.59% successfully completed the course. Those who are 65 or older had the highest chance of success (22.91%). Learners' chance of success appears to increase after the age of 26 with learners aged between 18 and 25 having the lowest chance of success (4.20%).
-
-**Goal 2.3 (Education Level)**
-
-Applying the same analysis process as Goal 2.1 and 2.3, the success rate of each highest level of education was calculated. Again, the code can be found in ```eda2.R```.
-
-```{R edu_success_rate, echo = FALSE}
-# Success rate of education as a tibble
-edu_success_rate <- tribble(~Success_Rate, ~Percentage, "Education", 12.55, "Apprenticeship", 0.00, "Less_Secondary", 10.00, "Secondary", 10.91, "Professional", 15.04, "Tertiary", 10.53, "University_degree", 13.77, "University_masters", 11.38, "University_doctorate", 15.07) %>%
-  print()
-```
-
-This table shows us that of the 4135 learners who declared their highest education level, 12.55% successfully completed the course. Those who held university doctorates (15.07%) or professional qualifications (15.04) had the highest chance of success. Those who held apprenticeships had the lowest chance of success (0%). 
-
-**Goal 2.4 (Employment Status)**
-
-Applying the same analysis process as Goal 2.1 and 2.3, the success rate of each employment status was calculated. Again, the code can be found in ```eda2.R```.
-
-```{R estatus_success_rate, echo = FALSE}
-# Success rate of employment status as a tibble
-estatus_success_rate <- tribble(~Success_Rate, ~Percentage, "Employment", 12.57, "Student_FT", 4.76, "Looking", 8.31, "Not_working", 11.30, "Retired", 22.45, "Unemployed", 9.36, "Self-employed", 10.91, "Working_FT", 13.12, "Working_PT", 9.27) %>%
-  print()
-```
-
-This table shows us that of the 4105 learners who declared their employment status, 12.57% completed the course. Learners who are retired have the highest chance of success (22.45%) and learners who are also full time students have the lowest chance of success (4.76%).
-
-## Business understanding (Third Iteration)
-
-### Business objectives and success criteria
-
-Our core objective is to determine whether learners have a higher chance of success the more data they share with FutureLearn. The second investigation into the data provided by Newcastle University  suggests that different groupings of learners have a higher chance of success and that there is some correlation between their success rate and sharing more data they share with FutureLearn. However, the business success criteria is to give useful insights into the relationship between learner engagement and learner success rate.
-
-### Data mining goals and success criteria
-
-Archetypes!
-
-## Data preparation 
-
-(a description of the dataset after pre-processing and the process it was produced - basically why and how of munge stuff)
-
-## Outputs 
-
-Gender 
 ```{R gender_success_rate, echo = FALSE}
 # Success rate of gender as a tibble
 gender_success_rate <- tribble(~Success_Rate, ~Percentage, "Gender", 12.26,"Male", 14.02, "Female", 10.74, "Nonbinary", 8.33, "Other", 7.14) %>%
@@ -387,16 +341,179 @@ gender_success_rate <- tribble(~Success_Rate, ~Percentage, "Gender", 12.26,"Male
 
 The table shows us that of learners who declared their gender, those who identified as male had a higher chance of success (14.02%) than people who identified as another gender. Those who identified as other had the lowest chance of success (7.14%).
 
-Age
+The graph below was created to better understand the provision of demographic data by learners who declared their gender. 
 
-
-```{r pressure, echo=FALSE}
-plot(pressure)
+```{R gender_demographic_declared, echo = FALSE}
+# Quick plot of gender counts by amount of demographic data declared.
+gender_counts %>%
+  ggplot(aes(x = num_true, y = n, fill = gender)) + geom_bar(stat="identity", position="dodge") + scale_fill_brewer(palette = "PuOr") + labs(title = "Number of Demographic Fields by Number of Learners per Gender ", x = "Number of Demographic Data Fields Provided by Learner", y = "Number of Learners", fill = "Gender")
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+This graph indicates that learners who identify as male are more likely to declare all six demographic data values than women. Similarly, if a learner declares that they identify as nonbinary or other, five or more demographic fields are provided. This graph also suggests that learners who share their gender with FutureLearn are also likely to share more demographic data. To better understand these results, further exploration is required.
 
+**Goal 2.2 (Age Success Rate)**
 
+The same analysis process used for Goal 2.1 has been applied for Goal 2.2. We can determine that 4028 learners declared their age range to FutureLearn. In the graph below it appears that learners have a higher chance of success the older they are.
+
+```{R age_completion, echo = FALSE}
+# Group by age 
+age_counts <- true_counts %>%
+  group_by(num_true, age_range, completed) %>%
+  count() %>%
+  filter(!(age_range == "Unknown")) 
+
+# Quick plot of age counts by course completion.
+age_counts %>%
+  mutate(age_range = factor(age_range, ordered=TRUE,
+                            levels = c("<18", "18-25", "26-35", "36-45", "46-55", "56-65", ">65"))) %>%
+  ggplot(aes(x = age_range, y = n, fill = completed)) + geom_bar(stat="identity", position="dodge") + scale_fill_brewer(palette = "Paired") + labs(title = "Course Completion by Learner Age Range", x = "Learner Age Range", y = "Number of Learners", fill = "Course Completed") 
+```
+
+To better understand the results of this graph, the table below was also created (the code for calculating the percentages is located in the file ```eda2.R``` which is in the ```src``` folder).
+
+```{R age_success_rate, echo = FALSE}
+# Success rate of age as a tibble
+age_success_rate <- tribble(~Success_Rate, ~Percentage, "Age", 12.59, "<18", 4.76, "18-25", 4.2, "26-35", 8.8, "36-45", 11.02, "46-55", 14.12, "56-65", 17.97, ">65", 22.91) %>%
+  print()
+```
+
+This table shows us that of learners who declared their age 12.59% successfully completed the course. Those who are 65 or older had the highest chance of success (22.91%). Learners' chance of success appears to increase after the age of 26 with learners aged between 18 and 25 having the lowest chance of success (4.20%).
+
+The graph below was created to better understand the provision of demographic data by learners who declared their age.
+
+```{R age_demographics_declared, echo = FALSE}
+#Quick plot of age counts by number of demographic fields provided.
+age_counts %>%
+  mutate(age_range = factor(age_range, ordered=TRUE,
+                            levels = c("<18", "18-25", "26-35", "36-45", "46-55", "56-65", ">65"))) %>%
+  ggplot(aes(x = num_true, y = n, fill = age_range)) + geom_bar(stat="identity", position="dodge") + scale_fill_brewer(palette = "PuOr") + labs(title = "Number of Demographic Fields by Number of Learners per Age", x = "Number of Demographic Data Fields Provided by Learner", y = "Number of Learners", fill = "Age")
+``` 
+
+This graph indicates that learners in the 26-25 age range are more likely to share all six demographic data values. Comparatively, if a learner declares they are over 65, they appear more likely to provide 4 or more demographic data values. This graph also suggests that learners who share their age range with FutureLearn are also likely to share more demographic data. To better understand these results, further exploration is required.
+
+**Goal 2.3 (Education Level)**
+
+Applying the same analysis process as Goal 2.1 and 2.2, we can determine that 4135 learners declared their highest education level to FutureLearn.
+
+```{R education_completion, echo = FALSE}
+# Group by highest level of education.
+education_counts <- true_counts %>%
+  group_by(num_true, highest_education_level, completed) %>%
+  count() %>%
+  filter(!(highest_education_level == "Unknown"))
+
+# Quick plot of highest level of education counts by course completion.
+education_counts %>%
+  ggplot(aes(x = highest_education_level, y = n, fill = completed)) + geom_bar(stat="identity", position="dodge") + scale_fill_brewer(palette = "Paired") + labs(title = "Course Completion by Learner Education Level", x = "Learner Education Level", y = "Number of Learners", fill = "Course Completed") + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+```
+From this graph, it is unclear which education level correlates to a higher chance of success for learners. It is clear that there are more students who enrol in the course who have either a tertiary qualification of some kind and specifically a university degree or university masters. To better understand the results of this graph, the table below was also created (the code for calculating the percentages is located in the file ```eda2.R``` which is in the ```src``` folder).
+
+```{R education_success_rate, echo = FALSE}
+# Success rate of education as a tibble
+edu_success_rate <- tribble(~Success_Rate, ~Percentage, "Education", 12.55, "Apprenticeship", 0.00, "Less_Secondary", 10.00, "Secondary", 10.91, "Professional", 15.04, "Tertiary", 10.53, "University_degree", 13.77, "University_masters", 11.38, "University_doctorate", 15.07) %>%
+  print()
+```
+
+This table shows us that of the learners who declared their highest education level, 12.55% successfully completed the course. Those who held university doctorates (15.07%) or professional qualifications (15.04) had the highest chance of success. Those who held apprenticeships had the lowest chance of success (0%). 
+
+The graph below was created to better understand the provision of demographic data by learners who declared their highest education level.
+
+```{R education_demographics_declared, echo = FALSE}
+#Quick plot of highest education counts by number of demographic fields.
+education_counts %>%
+  ggplot(aes(x = num_true, y = n, fill = highest_education_level)) + geom_bar(stat="identity", position="dodge") + scale_fill_brewer(palette = "PuOr") + labs(title = "Number of Demographic Fields by Number of Learners per Education", x = "Number of Demographic Data Fields Provided by Learner", y = "Number of Learners", fill = "Education Level")
+```
+
+This graph suggests that learners with a tertiary qualification of some kind (tertiary, university_degree, university_masters, university_doctorate) are more likely to share more demographic data with FutureLearn. It also indicates that those with apprenticeships and professional qualifications are less likely to share more demographic data with FutureLearn. To better understand these results, further investigation is required.
+
+**Goal 2.4 (Employment Status)**
+
+Applying the same analysis process as Goal 2.1, 2.2, and 2.3, we can determine that 4105 learners declared their employment status to FutureLearn. In the graph below it appears that learners have a higher chance of success if they are retired.
+
+```{R employment_status_completion, echo = FALSE}
+# Group by employment status.
+estatus_counts <- true_counts %>%
+  group_by(num_true, employment_status, completed) %>%
+  count() %>%
+  filter(!(employment_status == "Unknown"))
+
+# Quick plot of employment status counts by course completion.
+estatus_counts %>%
+  ggplot(aes(x = employment_status, y = n, fill = completed)) + geom_bar(stat="identity", position="dodge") + scale_fill_brewer(palette = "Paired") + labs(title = "Course Completion by Learner Employment Status", x = "Learner Employment Status", y = "Number of Learners", fill = "Course Completed") + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+```
+To better understand the results of this graph, the table below was also created (the code for calculating the percentages is located in the file ```eda2.R``` which is in the ```src``` folder).
+
+```{R estatus_success_rate, echo = FALSE}
+# Success rate of employment status as a tibble
+estatus_success_rate <- tribble(~Success_Rate, ~Percentage, "Employment", 12.57, "Student_FT", 4.76, "Looking", 8.31, "Not_working", 11.30, "Retired", 22.45, "Unemployed", 9.36, "Self-employed", 10.91, "Working_FT", 13.12, "Working_PT", 9.27) %>%
+  print()
+```
+
+This table shows us that of the 4105 learners who declared their employment status, 12.57% completed the course. Learners who are retired have the highest chance of success (22.45%) and learners who are also full time learners have the lowest chance of success (4.76%).
+
+The graph below was created to better understand the provision of demographic data by learners who declared their employment status. 
+
+```{R employment_demographic_declared, echo = FALSE}
+# Quick plot of employment status counts by number of demographic fields provided. 
+estatus_counts %>%
+  ggplot(aes(x = num_true, y = n, fill = employment_status)) + geom_bar(stat="identity", position="dodge") + scale_fill_brewer(palette = "PuOr") + labs(title = "Number of Demographic Fields by Number of Learners per Employment", x = "Number of Demographic Data Fields Provided by Learner", y = "Number of Learners", fill = "Employment Status")
+```
+This graph indicates that learners who are working full time may be more likely to provide FutureLearn with more demographic data (although this could seem this was as there are more learners who are working full time). The graph also suggests that those who are retired are more likely to share five instead of six demographic data values with FutureLearn, and it would be interesting investigate if these learners do not share the same demographic data value. To better understand these results, further exploration is needed.
+
+## Data preparation 
+
+This section outlines the pre-processing steps that produce the data utilised by this report. The pre-processing code can be found in the folder called ```munge```. All pre-processing code is included so that anyone can run the code of this project directly from this report. The code includes:
+
+1. All seven enrolments data sets are combined into one single data set. The enrolments data set is chosen as the majority of demographic data provided by learners can be found here. 
+
+2. This data set is formatted so that all empty cells appear as NA. 
+
+3. Two filters are created that divide this data by learners who completed (complete) and learners who did not complete (incomplete) the course. 
+
+4. A new data set is created for the initial investigation (FL1) so that any data transformation or tidying is not applied to the raw data. In this new data set, there are seven new columns apply TRUE or FALSE based on whether there data in the aforementioned demographic data fields and in fully_participated_at.
+
+5. The learner_ids for these new columns are identified and are pulled together as 'ids_of_declared_cols'.
+
+6. A new column is created in FL1 that counts the number of TRUEs in the aforementioned columns. 
+
+7. There is also some pre-processing data for the third iteration of exploratory data analysis, which is not yet finished and, therefore, not included in this report. This code combined the seven archetype data sets, joins these to FL1 by learner_id, and creates a new data set of this called FL2. The data needed to assign learners with archetypes is potentially demographic data, and so potential insights from archetype data sets could offer an interesting comparison to the insights from the demographic data in the enrolments spreadsheet. 
+
+## Evaluation
+
+### Assessment of data mining results with respect to business success criteria
+
+The process and findings described by this report explore the question: "Do learners have a higher chance of success the more data they share with FutureLearn?" The business success criteria of this project is to give useful insights into the relationship between learner engagement and learner success rate. Learners' provision of optional demographic data is regarded as a proxy for learner engagement. Learner success rate is regarded as the likelihood a learner completes the course they enrolled in. Learner engagement and learner success rate are indicators of learning effectiveness, and the results of the data mining are interpreted with that context in mind. 
+
+```{R results, echo = FALSE}
+# Key data mining results as a tibble
+FL_results <- tribble(~Success_Rate, ~Percentage, "Gross", 5.78, "No Demographic Data", 4.92, "Demographic Data", 12.53, "Gender", 12.26, "Male", 14.02, "Other", 7.14, "Age", 12.59, ">65", 22.91, "18-25", 4.20, "Education", 12.55, "Doctorate", 15.07, "Apprenticeship", 0, "Employment Status", 12.57, "Retired", 22.45, "Student", 4.76) %>%
+  print()
+```
+This table shows the overarching success rates as well as the best and worst success rate for each field of demographic data explored through this report. The success rate of learners who share demographic data with FutureLearn is significantly higher (2.55x) than learners who do not. Interestingly, the success rate for learners who provide demographic data (12.53%) is not dissimilar for the overarching success rate of different demographic fields, such as gender (12.26%), age (12.59%), education (12.55%), employment status (12.57%). However, within these fields of demographic data, the results vary more widely. 
+
+The data mining results suggest that FutureLearn is most effective for people who identify as male (14.02%), are aged over 65 (22.91%), hold a doctorate (15.07%) or are retired (22.45%). The results also indicate that FutureLearn is least effective for people who identify as other (7.14%), are between the ages of 18 and 25 (4.20%), who hold an apprenticeship (0%) or are a full time student (4.76%). The similarity between some of these data variables suggests that FutureLearn may be more effective for experienced learners with more time on their hands. Further investigation is, however, needed to understand whether these variables refer to particular learner_ids or pattern for learners.
+
+Initial insights were also collected to better understand the engagement of those who provided demographic data. The data mining results indicate that those who share demographic data are likely to provide FutureLearn with more demographic data. Further investigation is needed to conclusively determine whether learners have a higher chance of success the more data they share with FutureLearn; the findings in this report, however, suggest this holds true. 
+
+The findings of the exploratory analysis in this report do produce  useful insights into the relationship between learner engagement and learner success rate. There is a clear correlation between these indicators of learning effectiveness, and it does appear that learners who engage by providing demographic data are more likely to succeed.
+
+### Review of process
+
+This project has been limited by the time available, programming capabilities, choice of data sets, and scope of the project to focus on data exploration. The process has been sufficiently effective to somewhat address the business objective and success criteria. This project, however, focused more on learners success rate than learner engagement. If the project should be repeated, further attention should be given to understanding the impact of the amount of data shared by students as well as different indicators of learner engagement, such as archetypes, step activity and leaving survey responses. 
+
+### List of possible actions
+
+If the project were to be continued, the possible actions recommended are:
+
+1. Calculate the success rate for learners of demographic data field that also provide one, two, three, four, five and six demographic data fields. This will allow us to confirm whether or not there are spurious associations. 
+
+2. Explore the relationship between success rate and other indicators of learner engagement (as mentioned above).
+
+3. The finding of point 2 could then be compared with the findings for demographic data fields outlined by this report. This would help FutureLearn and Newcastle University better understand which proxies best reflect learner engagement. 
+
+4. Where groups of learners' success rate are lower, we should explore whether or not they responded to the leaving survey and what the most common responses are. This will help us to identify how we might improve FutureLean's learning effectiveness for them.
+
+5. Another interest avenue for exploration is the relationship between the learners' success rate and completion time, as this could be another indicator of learner engagement. 
 
 \newpage
 

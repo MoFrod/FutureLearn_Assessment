@@ -36,7 +36,8 @@ joint_full <- left_join(FL1, full_archetypes, by = "learner_id", archetype)
 
 # Create data set of students, demographic data and archetypes for further investigation
 FL2 <- as_tibble(joint_full) #Create tibble
-  
+
+
 
 
 
