@@ -4,7 +4,7 @@ full_enrolments <- rbind(cyber.security.1_enrolments, cyber.security.2_enrolment
 # Show empty cells as NA
 full_enrolments <- full_enrolments %>% mutate_all(na_if,"")
 
-#Filter how many students completed and did not complete the course
+# Filter how many students completed and did not complete the course
 complete <- filter(full_enrolments, !is.na(full_enrolments$fully_participated_at))#Filter students who have completed the course
 incomplete <- filter(full_enrolments, is.na(full_enrolments$fully_participated_at)) #Filter students who have not completed the course
 
@@ -27,7 +27,7 @@ true_counts <- FL1 %>%
   mutate(num_true = rowSums(.[ids_of_declared_cols] != FALSE)) %>% # Count up how many of the columns have a value != FALSE.
   print(ids_of_declared_cols, num_true, completed, n = 20, width = Inf) # View the selected columns (from line 3) and also the count, to confirm we have the intended result.
 
-#Combine archetype data for cs course into cyber_security_full_archetypes
+# Combine archetype data for cs course into cyber_security_full_archetypes
 full_archetypes <- rbind(cyber.security.1_archetype.survey.responses, cyber.security.2_archetype.survey.responses, cyber.security.3_archetype.survey.responses, cyber.security.4_archetype.survey.responses, cyber.security.5_archetype.survey.responses, cyber.security.6_archetype.survey.responses, cyber.security.7_archetype.survey.responses)
 
 # Join between enrolments and archetype_survey_response on learner_id

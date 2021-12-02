@@ -1,4 +1,4 @@
-# Tibble of success rates (this will go in the report model section)
+# Tibble of all success rates
 total_success_rates <- tribble(~Success_Rate, ~Percentage, "Gross", 5.78, "No Demographic Data", 4.92, "Demographic Data", 12.53,) %>%
   print()
 
