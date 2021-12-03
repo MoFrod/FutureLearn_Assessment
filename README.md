@@ -22,7 +22,8 @@ You'll also see that I have:
 * stored the datasets in `data` and they've loaded into `cache`;
 * put preprocessing code in `munge`;
 * included useful code (well... I found it useful) in `src`;
-* saved the graphs created into `graphs`; and
+* saved the graphs created into `graphs`; 
+* stored my presentation slides in `docs`; and
 * included a bibliography in `reports`.
 
 Once that's done, you can have fun exploring what I've done, and build on it by 
