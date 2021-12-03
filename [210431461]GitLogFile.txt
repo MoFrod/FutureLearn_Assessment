@@ -1,0 +1,101 @@
+commit 3417be6772a93173fe8162bc346e0d13154fce55
+Author: Morgan Frodsham <morgan@frodsham.net>
+Date:   Fri Dec 3 00:23:23 2021 +0000
+
+    Update README file to show where the presentation slides are.
+
+commit e2cbe61dc805fc04657fc43a14878216c4eb78eb
+Author: Morgan Frodsham <morgan@frodsham.net>
+Date:   Thu Dec 2 22:59:58 2021 +0000
+
+    Removed unecessary csv.
+
+commit 99c061bc0b930ac4e8cab493c76bf635f0401b27
+Author: Morgan Frodsham <morgan@frodsham.net>
+Date:   Thu Dec 2 22:58:45 2021 +0000
+
+    Final drafting on report, including the bibliograhy, added critical reflections as RMarkdown, and edited necessary README files as well as tidied some of my code.
+
+commit 6673d8375b469dc4ccccfd61b4ccce3ef0eebce4
+Author: Morgan Frodsham <morgan@frodsham.net>
+Date:   Thu Dec 2 17:22:17 2021 +0000
+
+    Calculated success rate of different demographics, finalised and saved graphs, updated src data accordingly, continued to build report and updated munge code accordingly.
+
+commit 7c49c7af6c83488256d9ae88dc6764874ec92c46
+Author: Morgan Frodsham <morgan@frodsham.net>
+Date:   Wed Dec 1 20:25:24 2021 +0000
+
+    Continued to build report, saved a graph from 1st iteration of CRISP-DM, created new EDA files for 2nd and 3rd iteration of CRISM-DM.
+
+commit 558ced81e11fb72dca7993b44276f22e1d9fda96
+Author: Morgan Frodsham <morgan@frodsham.net>
+Date:   Wed Dec 1 17:12:29 2021 +0000
+
+    Built out my report with more detail and some EDA code, updated munge and src accordingly, and started to update the README file.
+
+commit 674a41ddef387c2ed6395f6122af5235f8fa2da9
+Author: Morgan Frodsham <morgan@frodsham.net>
+Date:   Tue Nov 30 18:58:32 2021 +0000
+
+    Updated report content and bibliography
+
+commit e55da58209f2be02d48157e575993c5cc43987e4
+Author: Morgan Frodsham <morgan@frodsham.net>
+Date:   Mon Nov 29 20:24:29 2021 +0000
+
+    Tidied data and calculated various success rates of learners
+
+commit 9d682b37002eb21e7c9c4f8436374dfcb089559a
+Author: Morgan Frodsham <morgan@frodsham.net>
+Date:   Mon Nov 29 18:43:15 2021 +0000
+
+    Tidied data so that empty cells show as NAs, added a bibliography, and EDA for archetypes data set
+
+commit 96da897b9490cbcae678adc2e70f8b02aabb5f60
+Author: Morgan Frodsham <morgan@frodsham.net>
+Date:   Thu Nov 25 21:55:48 2021 +0000
+
+    Transformed FL_data1 so values are TRUE/FALSE, investigated data with count and ggplot, created full archetype dataset and joined full enrolments with full archetype datasets.
+
+commit a2185c9987a55670f4c254f203810e53697970c0
+Author: Morgan Frodsham <morgan@frodsham.net>
+Date:   Wed Nov 24 19:38:54 2021 +0000
+
+    Updated global.dcf to automatically load needed libraries and experimented with R to tidy data for EDA
+
+commit 0a7eb62550f2b1dad76cb16612758d61357e3b33
+Author: Morgan Frodsham <morgan@frodsham.net>
+Date:   Tue Nov 23 20:33:16 2021 +0000
+
+    Added libraries needed and EDA (mostly learning R)
+
+commit c6f5a3a2328abc14df942da17d22213547e28d55
+Author: MoFrod <morgan@frodsham.net>
+Date:   Sat Nov 20 17:18:23 2021 +0000
+
+    Cleaned data and EDA (created bar plots)
+
+commit bf4a48768602747736babca6dc10ef92056399d0
+Author: MoFrod <morgan@frodsham.net>
+Date:   Fri Nov 19 17:25:08 2021 +0000
+
+    Cleaned data and EDA
+
+commit b8743dc4ebbdb8f1b98e92bcc8e33e55f886eebc
+Author: MoFrod <morgan@frodsham.net>
+Date:   Fri Nov 19 15:48:19 2021 +0000
+
+    Hide the assignment data
+
+commit 8368048200cccc710809bbbe54b88baa8ce993ce
+Author: Morgan Frodsham <morgan@frodsham.net>
+Date:   Mon Nov 8 16:56:11 2021 +0000
+
+    Imported data and set up RMarkdown Report
+
+commit dfce5b4e931d295b69264c3adceedb9ead2cb50a
+Author: Morgan Frodsham <morgan@frodsham.net>
+Date:   Mon Nov 8 14:16:29 2021 +0000
+
+    Set up ProjectTemplate
